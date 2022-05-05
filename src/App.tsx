@@ -3,7 +3,7 @@ import { Comment } from "./Components/Comments";
 import "./index.css"
 
 function App() {
-  const [comments, setComments] = useState<string[]>([])
+    const [comments, setComments] = useState<string[]>([])
 
   function createTweet() {
     const newComment = document.getElementById('newComment') as HTMLInputElement
@@ -16,6 +16,15 @@ function App() {
     }
   }
 
+  function clearField(){
+    const inputs = document.querySelectorAll('input')
+    const btnClear = document.getElementById('btnClear')
+
+    btnClear?.addEventListener('click', () =>{
+      inputs.forEach(input => input.value = '')
+    })
+  }
+
   return(
     <div id="content">
       <h2>Faça seu comentário logo abaixo: </h2>
@@ -24,9 +33,13 @@ function App() {
       })}
 
       <div id="input">
-        <input type="text" name="newComment" id="newComment" placeholder="Digite aqui" /><br></br>
-        <button onClick={createTweet}>Add comment</button>
+          <span>
+            <input type="text" name="newComment" id="newComment" placeholder="Digite aqui" /><br></br>
+            <button id="btnClear" onClick={clearField}>Clear field</button>
+          </span>
+            <button id="btn" onClick={createTweet}>Add comment</button>
       </div>
+        
     </div>
    )
 }
